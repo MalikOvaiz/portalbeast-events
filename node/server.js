@@ -242,6 +242,7 @@ var connectedClients = new Object();
 server.listen(4000);
 io.on('connection', function (socket) 
 {
+	console.log("Client Connected");
   redisClient.on('message', function(channel, message)
   {
 
