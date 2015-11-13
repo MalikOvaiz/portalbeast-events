@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   database: 'node',
   user     : 'root',
-  password : ''
+  password : 'contrivesolf00bar12'
 });
 connection.connect();
 // set the view engine to ejs
@@ -226,7 +226,7 @@ app.post('/authenticateuser', function(req, res)
 });
 
 
-app.listen(3000);
+app.listen(3001);
 
 
 
