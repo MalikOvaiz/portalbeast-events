@@ -1,0 +1,56 @@
+<!-- views/pages/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+                <h1>Notifications For Channel : <%= channels[0].name %></h1>
+
+                <div id="oldposts">
+
+                        <% posts.forEach(function(post) { %>
+                            <div style="border: 1px solid cornflowerblue;border-radius: 10px;padding-bottom: 1%;padding-top: 1%;margin-bottom: 2%;">
+                                    <p style="margin-left: 3%;"> <%= post.comment %>  </p>
+                             </div>       
+                                    
+                        <% }); %>
+                </div>
+                <div id="posts">
+
+                </div>
+                
+            </div>
+           
+        </div>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+    
+</body>
+</html>
+
+       <script>
+       
+        var socket = io.connect('http://localhost:4000');
+        socket.emit("join",{id:<%= session.userid %>,channelid:<%= channels[0].id %>});
+        socket.on('message', function (data) 
+        {
+            console.log(data);
+            $("#posts").append('<p>'+data.message+'</p>');
+          
+        });
+    </script>
